@@ -1,20 +1,23 @@
 node{
       def mvnHome = tool name: 'M2_HOME', type: 'maven' 
       stage('Checkout'){
+         echo "KOU Checkout"
          git 'https://github.com/khalidOubelque/hello-world.git'
        
       }  
       stage('Build'){
-         //// Get maven home path and build
+         echo "KOU Maven Build"
         sh "${mvnHome}/bin/mvn clean package -Dmaven.test.skip=true"
       }
      stage ('Test-JUnit'){
+          echo "KOU UT"
          sh "'${mvnHome}/bin/mvn' test surefire-report:report"
       }  
     
-      stage('Deploy') {     
-            sshagent(['dockerHost']) {
-               sh 'scp -o StrictHostKeyChecking=no webapp/target/*.war dockeradmin@ 172.31.35.165:/homme/dockeradmin/webapp/target/testJenkinsFile.war'
+      stage('Deploy') { 
+            echo "KOU Deploy"
+            ssh(['dockerHost']) {
+               sh 'scp -o StrictHostKeyChecking=no webapp/target/*.war dockeradmin@ 172.31.35.165:/homme/dockeradmin/webapp/target'
               
           }   
      }
