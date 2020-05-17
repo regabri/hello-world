@@ -12,12 +12,12 @@ node{
      stage ('Test-JUnit'){
           echo "KOU UT"
          sh "'${mvnHome}/bin/mvn' test surefire-report:report"
-      }  
+      }  \
+     stage('Deploy') { 
+            echo "KOU Deploy"
+               sh 'scp -r webapp/target/*.war dockeradmin@ 172.31.35.165:/home/dockeradmin/webapp/target'
+     }
+      
     
-      stage('Deploy'){
-            sshPublisher(publishers: 
-                         [sshPublisherDesc(configName: 'dockerHost', 
-                                           transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'apt-get update', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-      }
       
  }
