@@ -12,7 +12,7 @@ node{
      stage ('Test-JUnit'){
           echo "KOU UT"
          sh "'${mvnHome}/bin/mvn' test surefire-report:report"
-      }  \
+      }  
      stage('Deploy') { 
             echo "KOU Deploy"
                sh 'scp -r webapp/target/*.war dockeradmin@ 172.31.35.165:/home/dockeradmin/webapp/target'
