@@ -13,8 +13,8 @@ node{
       }  
     
       stage('Deploy') {     
-            sshagent(['Tomcat-jenkins']) {
-               sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war jenkins@35.193.54.220:/opt/tomcat/webapps'
+            sshagent(['dockerHost']) {
+               sh 'scp -o StrictHostKeyChecking=no webapp/target/*.war dockeradmin@ 172.31.35.165:/homme/dockeradmin/webapp/target'
               
           }   
      }
