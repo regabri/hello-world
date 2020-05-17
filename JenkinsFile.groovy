@@ -16,10 +16,7 @@ node{
     
       stage('Deploy') { 
             echo "KOU Deploy"
-            ssh(['dockerHost']) {
-               sh 'scp -o StrictHostKeyChecking=no webapp/target/*.war dockeradmin@ 172.31.35.165:/homme/dockeradmin/webapp/target'
-              
-          }   
+               sh 'scp -r webapp/target/*.war dockeradmin@ 172.31.35.165:/homme/dockeradmin/webapp/target'
      }
       
  }
