@@ -15,7 +15,7 @@ node{
       }  
      stage('Deploy') { 
             echo "KOU Deploy"
-           sshagent(credentials: ['Jenkins-docker']) {
+           sshagent(['Jenkins-docker']) {
                sh 'scp StrictHostKeyChecking=no webapp/target/*.war dockeradmin@172.31.35.165:/home/dockeradmin/webapp/target'
               
           }
