@@ -15,7 +15,10 @@ node{
       }  
      stage('Deploy') { 
             echo "KOU Deploy"
-              sh 'scp -r -o StrictHostKeyChecking=no webapp/target/*.war dockeradmin@172.31.35.165:/home/dockeradmin/webapp/target'
+           sshagent(['172.31.35.165']) {
+               sh 'scp -o StrictHostKeyChecking=no target/*.war dockeradmin@172.31.35.165:/home/dockeradmin/webapp/target'
+              
+          }
      }
       
     
