@@ -16,7 +16,7 @@ node{
      stage('Deploy') { 
             echo "KOU Deploy"
    
-           withCredentials([string(credentialsId: 'Jenkins_to_Docker')]) {
+           withCredentials([string(credentialsId: 'Jenkins_to_Docker', variable: 'khalidoubelque')]) {
                sh 'scp StrictHostKeyChecking=no webapp/target/*.war dockeradmin@172.31.35.165:/home/dockeradmin/webapp/target'
         }
 
