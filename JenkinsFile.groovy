@@ -1,6 +1,6 @@
 pipeline{
       agent any
-      enviroment {
+      environment {
             mvnHome = 'M2_HOME'
       }
       stages{
