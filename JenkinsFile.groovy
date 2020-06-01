@@ -33,9 +33,9 @@ pipeline{
                         withCredentials([
                               usernamePassword(credentialsId:'Jenkins_to_Docker', usernameVariable: user, passwordVariable: pwd)
                         ]){
-                           //   sh "sshpass -p khalidoubelque" 
-                             // sh "scp StrictHostKeyChecking=no webapp/target/*.war dockeradmin@172.31.35.165:/home/dockeradmin/webapp/target"
-                              echo "KOU Test credentials username  $user  and password  $pwd "
+                              sh "sshpass -p '${pwd}'" 
+                              sh "scp StrictHostKeyChecking=no webapp/target/*.war ${user}@172.31.35.165:/home/dockeradmin/webapp/target"
+                              echo "KOU Test credentials username  ${user}  and password  $pwd "
 
                         }
                   }
