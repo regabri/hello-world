@@ -30,7 +30,7 @@ pipeline{
             stage('Deploy') { 
                   steps{
                         echo "KOU Deploy"
-                        Withcredentials([
+                        withCredentials([
                               usernamePassword(credentials:'Jenkins_to_Docker', usernameVariable: USER, passwordVariable: PWD)
                         ]){
                               //sshpass -p ${PWD} sh 'scp StrictHostKeyChecking=no webapp/target/*.war ${USER}@172.31.35.165:/home/dockeradmin/webapp/target'
