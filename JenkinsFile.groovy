@@ -31,10 +31,10 @@ pipeline{
                   steps{
                         echo "KOU Deploy"
                         withCredentials([
-                              usernamePassword(credentialsId:'Jenkins_to_Docker', usernameVariable: user, passwordVariable: pass)
+                              usernamePassword(credentialsId:'Jenkins_to_Docker', usernameVariable: user, passwordVariable: pwd)
                         ]){
                               //sshpass -p ${pass} sh 'scp StrictHostKeyChecking=no webapp/target/*.war ${user}@172.31.35.165:/home/dockeradmin/webapp/target'
-                              echo "KOU Test credentials username  $user  and password  $pass "
+                              echo "KOU Test credentials username  $user  and password  $pwd "
 
                         }
                   }
