@@ -8,7 +8,7 @@ pipeline{
              stage('Checkout'){
                    steps{
                         echo "KOU Checkout"
-                       // git 'https://github.com/khalidOubelque/hello-world.git'
+                        git 'https://github.com/khalidOubelque/hello-world.git'
                    }               
              }
        
@@ -16,14 +16,14 @@ pipeline{
             stage('Build'){
                   steps{
                      echo "KOU Maven Build"
-                     //sh "${mvnHome}/bin/mvn clean package -Dmaven.test.skip=true"
+                     sh "${mvnHome}/bin/mvn clean package -Dmaven.test.skip=true"
                   }
             }
             
              stage ('Test-JUnit'){
                    steps{
                      echo "KOU UT"
-                     //sh "'${mvnHome}/bin/mvn' test surefire-report:report"
+                     sh "'${mvnHome}/bin/mvn' test surefire-report:report"
                    }
             }
             
@@ -33,7 +33,7 @@ pipeline{
                         withCredentials([
                               usernamePassword(credentialsId:'Jenkins_to_Docker', usernameVariable: user, passwordVariable: pwd)
                         ]){
-                              //sshpass -p ${pass} sh 'scp StrictHostKeyChecking=no webapp/target/*.war ${user}@172.31.35.165:/home/dockeradmin/webapp/target'
+                              sshpass -p ${pwd} sh "scp StrictHostKeyChecking=no webapp/target/*.war ${user}@172.31.35.165:/home/dockeradmin/webapp/target"
                               echo "KOU Test credentials username  $user  and password  $pwd "
 
                         }
